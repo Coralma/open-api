@@ -28,7 +28,7 @@ public class HttpConnectionUtils {
 
     private final static Logger LOG = Logger.getLogger(HttpConnectionUtils.class);
 
-    private final static int HTTP_TIMEOUT = 3000;
+    private final static int HTTP_TIMEOUT = 300000;
 
     private final static String ENCODING = "UTF-8";
 
@@ -50,7 +50,7 @@ public class HttpConnectionUtils {
             CloseableHttpClient httpclient = HttpClientBuilder.create().build();
             httpGet.setConfig(getRequestConfig());
             response = httpclient.execute(httpGet);
-            /*System.out.println("StatusCode -> " + response.getStatusLine().getStatusCode());*/
+            /*System.out.println("StatusCode -> " + data.getStatusLine().getStatusCode());*/
             HttpEntity entity = response.getEntity();
             responseText = EntityUtils.toString(entity, usedEncoding);
         }
@@ -63,7 +63,7 @@ public class HttpConnectionUtils {
                 response.close();
             }
             catch (Exception e) {
-                LOG.error("Close response error within " + url + " , " + e.getMessage());
+                LOG.error("Close data error within " + url + " , " + e.getMessage());
             }
         }
         return responseText;
@@ -100,7 +100,7 @@ public class HttpConnectionUtils {
                 response.close();
             }
             catch (Exception e) {
-                LOG.error("Close response error within " + url + " , " + e.getMessage());
+                LOG.error("Close data error within " + url + " , " + e.getMessage());
             }
         }
         return responseText;
@@ -143,7 +143,7 @@ public class HttpConnectionUtils {
                 response.close();
             }
             catch (Exception e) {
-                LOG.error("Close response error within " + url + " , " + e.getMessage());
+                LOG.error("Close data error within " + url + " , " + e.getMessage());
             }
         }
         return responseText;

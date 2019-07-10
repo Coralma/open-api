@@ -15,7 +15,7 @@ import java.util.Map;
 public class StripeAPI {
 
     public static void main(String[] args) throws Exception {
-        Stripe.apiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+        Stripe.apiKey = "sk_test_lbpohsjMzvrEG2AagMzUDYtk";
 
         charge();
         //retrieve();
@@ -23,8 +23,8 @@ public class StripeAPI {
 
     public static void charge() throws StripeException {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("amount", 999);
-        params.put("currency", "usd");
+        params.put("amount", 100);
+        params.put("currency", "SGD");
         params.put("source", "tok_visa");
         params.put("receipt_email", "jenny.rosen@example.com");
         Charge charge = Charge.create(params);

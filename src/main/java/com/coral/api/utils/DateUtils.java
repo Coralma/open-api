@@ -319,4 +319,20 @@ public final class DateUtils {
         calendar.add(Calendar.MINUTE, minute);
         return calendar.getTime();
     }
+
+    public static int daysOfTwoDate(Date fDate, Date oDate) {
+        /*return (int)(oDate.getTime()-fDate.getTime())/(1000*3600*24);*/
+        Calendar aCalendar = Calendar.getInstance();
+        aCalendar.setTime(fDate);
+        int day1 = aCalendar.get(Calendar.DAY_OF_YEAR);
+        aCalendar.setTime(oDate);
+        int day2 = aCalendar.get(Calendar.DAY_OF_YEAR);
+        return day2-day1;
+    }
+
+    public static boolean isWeekend(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY);
+    }
 }
