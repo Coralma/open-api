@@ -20,6 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
+import javax.xml.bind.DatatypeConverter;
+
 /**
  * Utils class for Http Connection. The SMS and WeChat will invoke this utils class to send message.
  * Created by Coral on 2015/10/13.
@@ -69,6 +71,39 @@ public class HttpConnectionUtils {
         return responseText;
     }
 
+    public static String httpGetWithAuth(String url, String usedEncoding) {
+        String responseText = null;
+        CloseableHttpResponse response = null;
+        HttpGet httpGet = null;
+        try {
+            httpGet = new HttpGet(url);
+            CloseableHttpClient httpclient = HttpClientBuilder.create().build();
+            httpGet.setConfig(getRequestConfig());
+            //httpGet.addHeader("Authorization","Basic ZTRlZjg0YTYtNDg4Zi01NGM2LWJiYjMtNTMwMWQ4MTFkOTNjOmQ5YWQ1ZDRkLTU5NWMtNWJjYi05ZmFkLTQ2YzRhOTY2YTRhYQ==");
+            String encoding = DatatypeConverter.printBase64Binary("96a45199-49f2-5f9c-bd32-95b130cd9dc1:9de03364-3680-58d9-af3c-983fb52a7575".getBytes("UTF-8"));
+            httpGet.setHeader("Authorization", "Basic " +encoding);
+
+
+            response = httpclient.execute(httpGet);
+            /*System.out.println("StatusCode -> " + data.getStatusLine().getStatusCode());*/
+            HttpEntity entity = response.getEntity();
+            responseText = EntityUtils.toString(entity, usedEncoding);
+        }
+        catch (Exception e) {
+            LOG.error("Can not send GET message to " + url);
+        }
+        finally {
+            try {
+                httpGet.releaseConnection();
+                response.close();
+            }
+            catch (Exception e) {
+                LOG.error("Close data error within " + url + " , " + e.getMessage());
+            }
+        }
+        return responseText;
+    }
+
     /**
      * A Common http POST sender to handler the URL parameter. The URL should be with parameters if necessary.
      *
@@ -85,6 +120,39 @@ public class HttpConnectionUtils {
             httpPost = new HttpPost(url);
             httpPost.setEntity(new StringEntity(jsonParam, ENCODING));
             httpPost.setConfig(getRequestConfig());
+
+            response = httpclient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+            responseText = EntityUtils.toString(entity, ENCODING);
+            httpPost.releaseConnection();
+        }
+        catch (Exception e) {
+            LOG.error("Can not send POST message to " + url + " , " + e.getMessage());
+        }
+        finally {
+            try {
+                httpPost.releaseConnection();
+                response.close();
+            }
+            catch (Exception e) {
+                LOG.error("Close data error within " + url + " , " + e.getMessage());
+            }
+        }
+        return responseText;
+    }
+
+    public static String httpPostWithAuth(String url, String jsonParam) {
+        String responseText = null;
+        HttpPost httpPost = null;
+        CloseableHttpResponse response = null;
+        try {
+            CloseableHttpClient httpclient = HttpClientBuilder.create().build();
+            httpPost = new HttpPost(url);
+            httpPost.setEntity(new StringEntity(jsonParam, ENCODING));
+            httpPost.setConfig(getRequestConfig());
+            String encoding = DatatypeConverter.printBase64Binary("96a45199-49f2-5f9c-bd32-95b130cd9dc1:9de03364-3680-58d9-af3c-983fb52a7575".getBytes("UTF-8"));
+            httpPost.setHeader("Authorization", "Basic " +encoding);
+            httpPost.setHeader("Content-Type", "application/json");
 
             response = httpclient.execute(httpPost);
             HttpEntity entity = response.getEntity();
