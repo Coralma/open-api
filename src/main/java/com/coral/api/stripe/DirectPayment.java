@@ -42,7 +42,7 @@ public class DirectPayment {
 
         //发起支付
         Map<String, Object> payParams = new HashMap<>();
-        payParams.put("amount", 2800);
+        payParams.put("amount", 2500);
         payParams.put("currency", "usd");
         payParams.put("description", "Charge from Coral");
         payParams.put("customer", c.getId());

@@ -21,7 +21,7 @@ public class AuthPayment {
 
         //发起支付
         Map<String, Object> payParams = new HashMap<>();
-        payParams.put("amount", 16000);
+        payParams.put("amount", 4000);
         payParams.put("currency", "sgd");
         payParams.put("description", "PreAuth by Snack " + DateUtils.date2String(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS));
         payParams.put("customer", customerID);

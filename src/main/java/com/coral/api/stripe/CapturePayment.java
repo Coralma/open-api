@@ -16,7 +16,7 @@ public class CapturePayment {
     public static void main(String[] args) throws Exception {
         Stripe.apiKey = "sk_test_j61O41rS0rYDJFrsC5HQnGMq00StxV7wVC";
 
-        String authChargeId = "ch_1FrLuvE4t518uVYgr8VT1EIc";
+        String authChargeId = "ch_1FsgzWE4t518uVYg4QvhGxhV";
         Charge charge2 = Charge.retrieve(authChargeId);
 
         Map<String, Object> captureParams = new HashMap<>();
