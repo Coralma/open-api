@@ -16,11 +16,11 @@ public class CapturePayment {
     public static void main(String[] args) throws Exception {
         Stripe.apiKey = "sk_test_j61O41rS0rYDJFrsC5HQnGMq00StxV7wVC";
 
-        String authChargeId = "ch_1FsgzWE4t518uVYg4QvhGxhV";
+        String authChargeId = "ch_1FxDAeE4t518uVYgxKltBj9z";
         Charge charge2 = Charge.retrieve(authChargeId);
 
         Map<String, Object> captureParams = new HashMap<>();
-        captureParams.put("amount", 1000);
+        captureParams.put("amount", 1200);
         //captureParams.put("description", "Capture by Snack");
         Charge c = charge2.capture(captureParams);
         System.out.println(c);

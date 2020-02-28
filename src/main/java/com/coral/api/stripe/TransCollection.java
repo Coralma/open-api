@@ -15,9 +15,9 @@ public class TransCollection {
         Stripe.apiKey = "sk_test_j61O41rS0rYDJFrsC5HQnGMq00StxV7wVC";
 
         Map<String, Object> params = new HashMap<>();
-        params.put("payout", "po_1FsMWuE4t518uVYgEEy50HfN");
+        params.put("payout", "po_1FxkL5E4t518uVYgQBriFDDm");
         //params.put("type", "charge");
-        params.put("limit", 10);
+        params.put("limit", 50);
         BalanceTransactionCollection btc = BalanceTransaction.list(params);
         System.out.println(btc);
 

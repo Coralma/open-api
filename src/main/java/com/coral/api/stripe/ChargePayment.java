@@ -16,9 +16,9 @@ public class ChargePayment {
 
         //发起支付
         Map<String, Object> payParams = new HashMap<>();
-        payParams.put("amount", 1500);
+        payParams.put("amount", 5500);
         payParams.put("currency", "sgd");
-        payParams.put("description", "Direct Charge by Snack");
+        payParams.put("description", "Direct Charge by Coral");
         payParams.put("customer", customerID);
         Charge charge = Charge.create(payParams);
         System.out.println(charge.getId());
